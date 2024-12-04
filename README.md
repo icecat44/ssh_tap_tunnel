@@ -5,15 +5,17 @@
 Предполагается, что у вас удаленная сеть имеет диапазон 10.0.250.0/24. 
 
 На стороне локальной сети выполняем:
-ssh -o "PermitLocalCommand=yes" \ 
--o "LocalCommand=ip l set up tap5 && ip a add 10.0.250.250/24" \ 
--o Tunnel=ethernet \ 
--w 5:5 \ 
--t $RemoteUsername@$RemoteServerIP \ 
--o ConnectTimeout=10 \ 
-"ip l set up tap5 && ip a add 10.0.250.251/24"
+
+    ssh -o "PermitLocalCommand=yes" \ 
+    -o "LocalCommand=ip l set up tap5 && ip a add 10.0.250.250/24" \ 
+    -o Tunnel=ethernet \ 
+    -w 5:5 \ 
+    -t $RemoteUsername@$RemoteServerIP \ 
+    -o ConnectTimeout=10 \ 
+    "ip l set up tap5 && ip a add 10.0.250.251/24"
 
 Тепрь у этого хоста появиться новый туннельный интерфейс с адресом в удаленной локальной сети.
 
 Для отладки добавьте в начале  ключ -v. 
+
 Для запуска в фоновом режиме использовать ключ -f.

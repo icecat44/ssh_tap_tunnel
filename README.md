@@ -8,12 +8,12 @@
 На стороне локальной сети выполняем:
 
     ssh -o "PermitLocalCommand=yes" \ 
-    -o "LocalCommand=ip l set up tap5 && ip a add 10.0.250.250/24" \ 
+    -o "LocalCommand=ip l set up tap5 && ip a add 10.0.250.250/24 dev tap5" \ 
     -o Tunnel=ethernet \ 
     -w 5:5 \ 
     -t $RemoteUser@$RemoteServer \ 
     -o ConnectTimeout=10 \ 
-    "ip l set up tap5 && ip a add 10.0.250.251/24"
+    "ip l set up tap5 && ip a add 10.0.250.251/24 dev tap5"
 
 Тепрь у этого хоста появиться новый туннельный интерфейс tap5 с адресом в удаленной локальной сети.
 
